@@ -871,6 +871,7 @@ function gerarRelatorio() {
 
 // ====== IMPRESSÃO EM PDF com numeração correta ======
 function imprimirRelatorioPDF() {
+  if (!isAdmin) { alert("🔒 Acesso restrito!\nFaça login como administrador para exportar ou imprimir."); return; }
   const dados = getRelatorioData();
   if (dados.length === 0) { alert('Nenhum dado para imprimir!'); return; }
   const incluirTel = isAdmin && document.getElementById('incluirContato') && document.getElementById('incluirContato').checked;
@@ -996,18 +997,21 @@ function imprimirRelatorioPDF() {
 
 // ====== EXPORTAR EXCEL (.xlsx) com numeração por setor ======
 function exportarRelatorioExcel() {
+  if (!isAdmin) { alert("🔒 Acesso restrito!\nFaça login como administrador para exportar ou imprimir."); return; }
   const dados = getRelatorioData();
   if (dados.length === 0) { alert('Nenhum dado para exportar!'); return; }
   _exportarExcel(dados, 'xlsx');
 }
 
 function exportarRelatorioXLS() {
+  if (!isAdmin) { alert("🔒 Acesso restrito!\nFaça login como administrador para exportar ou imprimir."); return; }
   const dados = getRelatorioData();
   if (dados.length === 0) { alert('Nenhum dado para exportar!'); return; }
   _exportarExcel(dados, 'xls');
 }
 
 function exportarRelatorioCSV() {
+  if (!isAdmin) { alert("🔒 Acesso restrito!\nFaça login como administrador para exportar ou imprimir."); return; }
   const dados = getRelatorioData();
   if (dados.length === 0) { alert('Nenhum dado para exportar!'); return; }
 
@@ -1072,6 +1076,7 @@ function _exportarExcel(dados, formato) {
 
 // ====== BACKUP GERAL ======
 function exportarExcelGeral() {
+  if (!isAdmin) { alert("🔒 Acesso restrito!\nFaça login como administrador para exportar ou imprimir."); return; }
   if (frota.length === 0) { alert('Nenhum dado para exportar!'); return; }
   const ws = XLSX.utils.json_to_sheet(frota.map(v => ({
     Nº: v.numero, Local: v.local, Veículo: v.veiculo, Cor: v.cor,
@@ -1084,6 +1089,7 @@ function exportarExcelGeral() {
 }
 
 function exportarBackup() {
+  if (!isAdmin) { alert("🔒 Acesso restrito!\nFaça login como administrador para exportar ou imprimir."); return; }
   const payload = { frota, nextId, data: new Date().toLocaleString('pt-BR') };
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
@@ -1481,6 +1487,7 @@ function renderPorVeiculo() {
 
 // ====== IMPRESSÃO CONSOLIDADO GERAL ======
 function imprimirConsolidado() {
+  if (!isAdmin) { alert("🔒 Acesso restrito!\nFaça login como administrador para exportar ou imprimir."); return; }
   const logoData = localStorage.getItem('logo_sesma') || LOGO_FIXA;
   const logoHtml = logoData ? `<img src="${logoData}" style="height:60px;object-fit:contain;">` : '<div style="font-size:32px;">🏛️</div>';
 
@@ -1572,6 +1579,7 @@ function imprimirConsolidado() {
 
 // ====== IMPRESSÃO POR VEÍCULO ======
 function imprimirPorVeiculo() {
+  if (!isAdmin) { alert("🔒 Acesso restrito!\nFaça login como administrador para exportar ou imprimir."); return; }
   const logoData = localStorage.getItem('logo_sesma') || LOGO_FIXA;
   const logoHtml = logoData ? `<img src="${logoData}" style="height:60px;object-fit:contain;">` : '<div style="font-size:32px;">🏛️</div>';
 
@@ -1664,6 +1672,7 @@ function imprimirPorVeiculo() {
 
 // ====== EXPORTAR CONSOLIDADO EXCEL ======
 function exportarConsolidadoExcel() {
+  if (!isAdmin) { alert("🔒 Acesso restrito!\nFaça login como administrador para exportar ou imprimir."); return; }
   const wb = XLSX.utils.book_new();
   const porLocal = {};
   frota.forEach(v => {
@@ -1692,6 +1701,7 @@ function exportarConsolidadoExcel() {
 
 // ====== EXPORTAR POR VEÍCULO EXCEL ======
 function exportarPorVeiculoExcel() {
+  if (!isAdmin) { alert("🔒 Acesso restrito!\nFaça login como administrador para exportar ou imprimir."); return; }
   const wb = XLSX.utils.book_new();
   const porTipo = {};
   frota.forEach(v => {
